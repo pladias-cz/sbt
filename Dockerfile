@@ -20,8 +20,9 @@ RUN set -eux; \
 
 # ---------------------------
 # Stage 2: Dev image
+# the multistage is not neccessary here, but as a template for prod dockerfile..
 # ---------------------------
-FROM eclipse-temurin:21-jdk-noble@sha256:efec1fca48fed530d4727c1ecd9c48d955153bad24067ee43ccf55e6e0d727c7
+FROM sbtscala/scala-sbt:eclipse-temurin-21.0.8_9_1.12.0_3.3.7@sha256:ef358174f9787f888cfb1d11725512ac83f677fb2b37261402350cacb9803de8 AS builder
 
 USER ubuntu
 ENV HOME=/home/ubuntu
