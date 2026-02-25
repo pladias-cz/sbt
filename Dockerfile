@@ -6,8 +6,8 @@ FROM sbtscala/scala-sbt:eclipse-temurin-21.0.8_9_1.12.0_3.3.7@sha256:ef358174f97
 # Arguments (warm-up)
 ARG SCALA_VERSION=3.3.7
 
-USER sbtuser
-WORKDIR /home/sbtuser/app
+USER ubuntu
+WORKDIR /home/ubuntu/app
 
 # Warm sbt cache
 RUN set -eux; \
@@ -24,12 +24,15 @@ RUN set -eux; \
 # ---------------------------
 FROM sbtscala/scala-sbt:eclipse-temurin-21.0.8_9_1.12.0_3.3.7@sha256:ef358174f9787f888cfb1d11725512ac83f677fb2b37261402350cacb9803de8
 
-USER ubuntu
 ENV HOME=/home/ubuntu
 
 # Copy sbt cache from builder
-#COPY --from=builder /home/sbtuser/.ivy2 $HOME/.ivy2
-COPY --from=builder /home/sbtuser/.cache/coursier $HOME/.cache/coursier
+#COPY --from=builder $HOME/.ivy2 $HOME/.ivy2
+COPY --from=builder $HOME/.cache/coursier $HOME/.cache/coursier
+
+RUN chown -R ubuntu:ubuntu $HOME # ~/.cache is somehow owned by root
+
+USER ubuntu
 
 # Working directory & volume
 WORKDIR $HOME/app
