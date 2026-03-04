@@ -11,6 +11,11 @@ WORKDIR $HOME/app
 VOLUME $HOME/app
 
 USER root
+
+RUN apt update
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
+RUN apt install -y nodejs
+
 RUN chown -R ubuntu:ubuntu $HOME # ~/.cache is somehow owned by root
 
 # Warm sbt cache
