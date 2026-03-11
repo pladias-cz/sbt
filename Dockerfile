@@ -24,6 +24,9 @@ RUN set -eux; \
     sbt -batch compile; \
     rm -rf project build.sbt Temp.scala target
 
+# Debug options
+ENV JAVA_OPTS="-Xms2G -Xmx2G -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+
 # Dev entrypoint
 ENTRYPOINT ["sbt", "-Dhttp.address=0.0.0.0", "-Dconfig.file=/home/ubuntu/app/conf/development.conf"]
 # "clean update run"
