@@ -47,7 +47,7 @@ RUN sbt sbtVersion && \
 EXPOSE 9000 5005
 
 # Debug options
-ENV JAVA_OPTS="-Xms2G -Xmx2G -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+ENV JAVA_OPTS="-Xms2G -Xmx2G -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
 
 # Entrypoint / CMD
 ENTRYPOINT ["sbt", "-Dhttp.address=0.0.0.0", "-Dconfig.file=/home/app/conf/development.conf"]
