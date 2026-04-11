@@ -14,6 +14,11 @@ USER root
 
 RUN chown -R ubuntu:ubuntu $HOME # ~/.cache is somehow owned by root
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Warm sbt cache
 USER ubuntu
 RUN set -eux; \
