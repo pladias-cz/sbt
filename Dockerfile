@@ -1,6 +1,7 @@
-FROM sbtscala/scala-sbt:eclipse-temurin-21.0.8_9_1.12.0_3.3.7@sha256:ef358174f9787f888cfb1d11725512ac83f677fb2b37261402350cacb9803de8
+FROM sbtscala/scala-sbt:eclipse-temurin-25.0.5_8_1.13.1_3.3.9@sha256:576e29b2ef93c863fd1c9bf4b6d793f11321aa8a9b6899e64d54bd414b7cc028
 
-ARG SCALA_VERSION=3.3.7
+ARG SCALA_VERSION=3.3.9
+ARG SBT_VERSION=1.13.1
 ARG JAVA_OPTS="-Xms1G -Xmx2G"
 ENV HOME=/home/ubuntu
 
@@ -24,7 +25,7 @@ USER ubuntu
 RUN set -eux; \
     mkdir -p project; \
     echo "scalaVersion := \"${SCALA_VERSION}\"" > build.sbt; \
-    echo "sbt.version=1.12.0" > project/build.properties; \
+    echo "sbt.version=${SBT_VERSION}" > project/build.properties; \
     echo "case object Temp" > Temp.scala; \
     sbt -batch compile; \
     rm -rf project build.sbt Temp.scala target
