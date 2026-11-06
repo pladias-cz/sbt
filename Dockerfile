@@ -1,4 +1,4 @@
-FROM sbtscala/scala-sbt:eclipse-temurin-25.0.5_8_1.13.1_3.3.9@sha256:576e29b2ef93c863fd1c9bf4b6d793f11321aa8a9b6899e64d54bd414b7cc028
+FROM sbtscala/scala-sbt:eclipse-temurin-25_1.x@sha256:4dc57bf641cb67baf9aaefa39a5307b949f3cc734ebcd5b25b0f7f65f0729238
 
 ARG SCALA_VERSION=3.3.9
 ARG SBT_VERSION=1.13.1
